@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -13,94 +14,91 @@ class ChangableWidget extends StatefulWidget {
   }
 }
 
-createRandom(int) {
-  Random random = new Random();
-  return int = random.nextInt(1000);
-}
-
-checkResult1(int1, int2) {
-  if (int1 > int2) {
-    return true;
+class BottomNavBar extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return BottomNavigationBarLayout();
   }
-  return false;
-}
-
-checkResult2(int1, int2) {
-  if (int2 > int1) {
-    return true;
-  }
-  return false;
-}
-
-showMessage(correctAnswer) {
-  if (correctAnswer) {
-    return "Richtig";
-  }
-  return "Falsch";
-}
-
-setPoints(correctAnswer, points) {
-  if (correctAnswer) {
-    return points+1;
-  }
-  return points-1;
 }
 
 class BiggerNumberGameState extends State {
-  var textForLabel = 'Choose the bigger number';
-  var result = "";
-  bool correctAnswer;
-  int points = 0;
-
-
-  int randomNumber1 = createRandom(int);
-  int randomNumber2 = createRandom(int);
+  final List<String> entries = <String>['Tennis Match', 'Doppelpartner', 'Tennis for Fun'];
+  final List<String> locations = <String>['Hamburg-Altona', 'Winterhude', 'Harvestehude'];
+  final List<String> dateTime = <String>['08.10.2020 15:30', '11.10.2020 19:30', '18.10.2020 18:00'];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            child: Text(
-              textForLabel,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: entries.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 170,
+          color: Colors.indigo,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('${entries[index]}'),
+                  Icon(Icons.account_circle_outlined),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(Icons.add_location_alt_outlined),
+                  Text('${locations[index]}')
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(Icons.calendar_today_outlined),
+                  Text('${dateTime[index]}')
+                ],
+              )
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                correctAnswer = checkResult1(randomNumber1, randomNumber2);
-                result = showMessage(correctAnswer);
-                points = setPoints(correctAnswer, points);
-              });
-            },
-            child: Text("$randomNumber1"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                correctAnswer = checkResult2(randomNumber1, randomNumber2);
-                result = showMessage(correctAnswer);
-                points = setPoints(correctAnswer, points);
-              });
-            },
-            child: Text("$randomNumber2"),
-          ),
-          Container(
-            child: Text(
-              result,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Container(
-            child: Text(
-              "$points",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
+    );
+  }
+}
+
+class BottomNavigationBarLayout extends State {
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.black38,
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Suche',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add),
+          label: 'New',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.chat),
+          label: 'Chat',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle_outlined),
+          label: 'Account',
+        ),
+      ],
     );
   }
 }
@@ -110,11 +108,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.cyan,
         appBar: AppBar(
-          title: Text('Bigger Number Game'),
+          centerTitle: true,
+          toolbarHeight: 100,
+          title: Image.asset('images/LogoMeetMeThere.PNG',
+              width: 200,
+              height: 100,
+              fit:BoxFit.fill ),
+          backgroundColor: Colors.cyan,
         ),
         body:
         ChangableWidget(),
+        bottomNavigationBar:
+        BottomNavBar(),
       ),
     );
   }
