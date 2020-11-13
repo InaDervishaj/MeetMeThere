@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:biggerNumberGame/pages/pages.dart' as pages;
 
 main() {
   runApp(MyApp());
@@ -72,7 +73,45 @@ class BottomNavigationBarLayout extends State {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+    return Scaffold(
+      backgroundColor: Colors.black38,
+
+      appBar: AppBar(),
+      body: Center(
+        child: Row(
+          children: [
+            Container(
+              child: FlatButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  icon: Icon(Icons.home),
+                  label: Text('Home'),
+              ),
+            ),
+            Container(
+              child: FlatButton.icon(
+                onPressed: null,
+                icon: Icon(Icons.search),
+                label: Text('Suche'),
+              ),
+            ),
+            Container(
+              child: FlatButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/newEvent');
+                },
+                icon: Icon(Icons.add),
+                label: Text('New'),
+              ),
+            )
+          ],
+        ),
+
+      ),
+    );
+
+    /*return BottomNavigationBar(
       backgroundColor: Colors.black38,
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
@@ -99,14 +138,20 @@ class BottomNavigationBarLayout extends State {
           label: 'Account',
         ),
       ],
-    );
+    );*/
   }
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/home': (context) => pages.HomePage(),
+        '/account': (context) => pages.AccountPage(),
+        '/newEvent': (context) => pages.NewEventPage(),
+      },
       home: Scaffold(
         backgroundColor: Colors.cyan,
         appBar: AppBar(
@@ -125,5 +170,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
 }
 
