@@ -163,10 +163,8 @@ class MyApp extends StatelessWidget {
               fit:BoxFit.fill ),
           backgroundColor: Colors.cyan,
         ),
-        body:
-        ChangableWidget(),
-        bottomNavigationBar:
-        BottomNavBar(),
+        body: ChangableWidget(),
+        bottomNavigationBar:BottomNavBar(),
       ),
     );
   }
