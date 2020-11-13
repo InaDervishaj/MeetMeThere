@@ -72,8 +72,8 @@ class BiggerNumberGameState extends State {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: 15),
-                  Icon(Icons.calendar_today_outlined, color: Colors.white, size: 33),
+                  SizedBox(width: 20),
+                  Image.asset('images/calendar.png'),
                   SizedBox(width: 20),
                   Text('${dateTime[index]}', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "raleway", fontWeight: FontWeight.bold))
                 ],
