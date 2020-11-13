@@ -36,7 +36,7 @@ class BiggerNumberGameState extends State {
         return Container(
           height: 220,
           margin: EdgeInsets.only(bottom: 10, left: 15, right: 15),
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          padding: EdgeInsets.fromLTRB( 20, 5, 15, 5),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -54,7 +54,7 @@ class BiggerNumberGameState extends State {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('${entries[index].toUpperCase()}', style: TextStyle(color: Colors.white, fontSize: 28, fontFamily: "raleway", fontWeight: FontWeight.bold) ),
                   Image.asset('images/${photo[index]}'),
