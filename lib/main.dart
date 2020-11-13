@@ -64,7 +64,7 @@ class BiggerNumberGameState extends State {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(width: 20),
-                  Icon(Icons.add_location_alt_outlined, color: Color(0xFF293133), size: 33),
+                  Image.asset('images/Location.png'),
                   SizedBox(width: 20),
                   Text('${locations[index]}', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "raleway", fontWeight: FontWeight.bold) )
                 ],
@@ -72,7 +72,7 @@ class BiggerNumberGameState extends State {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: 20),
+                  SizedBox(width: 15),
                   Icon(Icons.calendar_today_outlined, color: Colors.white, size: 33),
                   SizedBox(width: 20),
                   Text('${dateTime[index]}', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "raleway", fontWeight: FontWeight.bold))
