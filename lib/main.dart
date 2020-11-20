@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'pages/eventPage.dart';
+
 main() {
   runApp(MyApp());
 }
