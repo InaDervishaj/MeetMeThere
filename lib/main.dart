@@ -19,6 +19,7 @@ class BottomNavBar extends StatefulWidget {
   State<StatefulWidget> createState() {
     return BottomNavigationBarLayout();
   }
+
 }
 
 class BiggerNumberGameState extends State {
@@ -95,10 +96,46 @@ class BiggerNumberGameState extends State {
 }
 
 class BottomNavigationBarLayout extends State {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static List<Widget> _widgetOptions = <Widget>[
+  ChangableWidget(),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+
+    return Scaffold(
+      backgroundColor: Color(0xFF00C2CB),
+      appBar: AppBar(
+        centerTitle: true,
+        toolbarHeight: 100,
+        elevation: 0.0,
+        title: Image.asset('images/LogoMeetMeThere.PNG',
+            width: 200,
+            height: 100 ),
+        backgroundColor: Color(0xFF00C2CB),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+    bottomNavigationBar:
+    BottomNavigationBar(
       backgroundColor: Color(0xFF293133),
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
@@ -125,6 +162,9 @@ class BottomNavigationBarLayout extends State {
           label: 'Account',
         ),
       ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+    ),
     );
   }
 }
@@ -133,22 +173,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xFF00C2CB),
-        appBar: AppBar(
-          centerTitle: true,
-          toolbarHeight: 100,
-          elevation: 0.0,
-          title: Image.asset('images/LogoMeetMeThere.PNG',
-              width: 200,
-              height: 100 ),
-          backgroundColor: Color(0xFF00C2CB),
-        ),
-        body:
-        ChangableWidget(),
-        bottomNavigationBar:
-        BottomNavBar(),
-      ),
+      home: BottomNavBar(),
     );
   }
 }
