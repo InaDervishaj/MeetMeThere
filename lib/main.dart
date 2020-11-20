@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'pages/eventPage.dart';
+
 main() {
   runApp(MyApp());
 }
@@ -22,9 +24,21 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class BiggerNumberGameState extends State {
-  final List<String> entries = <String>['Tennis Match', 'Doppelpartner', 'Tennis for Fun'];
-  final List<String> locations = <String>['Hamburg-Altona', 'Winterhude', 'Harvestehude'];
-  final List<String> dateTime = <String>['08.10.2020 15:30', '11.10.2020 19:30', '18.10.2020 18:00'];
+  final List<String> entries = <String>[
+    'Tennis Match',
+    'Doppelpartner',
+    'Tennis for Fun'
+  ];
+  final List<String> locations = <String>[
+    'Hamburg-Altona',
+    'Winterhude',
+    'Harvestehude'
+  ];
+  final List<String> dateTime = <String>[
+    '08.10.2020 15:30',
+    '11.10.2020 19:30',
+    '18.10.2020 18:00'
+  ];
   final List<String> photo = <String>['student.png', 'oldie.png', 'girl.png'];
 
   @override
@@ -33,59 +47,78 @@ class BiggerNumberGameState extends State {
       padding: const EdgeInsets.all(8),
       itemCount: entries.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          height: 220,
-          margin: EdgeInsets.only(bottom: 10, left: 15, right: 15),
-          padding: EdgeInsets.fromLTRB( 20, 5, 15, 5),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end:
-              Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
-              colors: [
-                const Color.fromRGBO(41, 49, 51, 0.39),
-                const Color.fromRGBO(112, 117, 118, 0.1)
-              ], // red to yellow
-              // repeats the gradient over the canvas
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/eventPage');
+          },
+          child: Container(
+            height: 220,
+            margin: EdgeInsets.only(bottom: 10, left: 15, right: 15),
+            padding: EdgeInsets.fromLTRB(20, 5, 15, 5),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment(
+                    0.8, 0.0), // 10% of the width, so there are ten blinds.
+                colors: [
+                  const Color.fromRGBO(41, 49, 51, 0.39),
+                  const Color.fromRGBO(112, 117, 118, 0.1)
+                ], // red to yellow
+                // repeats the gradient over the canvas
+              ),
             ),
-          ),
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('${entries[index].toUpperCase()}', style: TextStyle(color: Colors.white, fontSize: 28, fontFamily: "raleway", fontWeight: FontWeight.bold) ),
-                  Image.asset('images/${photo[index]}'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: 20),
-                  Image.asset('images/Location.png'),
-                  SizedBox(width: 20),
-                  Text('${locations[index]}', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "raleway", fontWeight: FontWeight.bold) )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: 20),
-                  Image.asset('images/calendar.png'),
-                  SizedBox(width: 20),
-                  Text('${dateTime[index]}', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "raleway", fontWeight: FontWeight.bold))
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(Icons.chat, color: Colors.red, size:35),
-                  SizedBox(width: 20),
-                ],
-              ),
-            ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('${entries[index].toUpperCase()}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontFamily: "raleway",
+                            fontWeight: FontWeight.bold)),
+                    Image.asset('images/${photo[index]}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 20),
+                    Image.asset('images/Location.png'),
+                    SizedBox(width: 20),
+                    Text('${locations[index]}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: "raleway",
+                            fontWeight: FontWeight.bold))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 20),
+                    Image.asset('images/calendar.png'),
+                    SizedBox(width: 20),
+                    Text('${dateTime[index]}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: "raleway",
+                            fontWeight: FontWeight.bold))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.chat, color: Colors.red, size: 35),
+                    SizedBox(width: 20),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -95,7 +128,6 @@ class BiggerNumberGameState extends State {
 }
 
 class BottomNavigationBarLayout extends State {
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -140,16 +172,16 @@ class MyApp extends StatelessWidget {
           toolbarHeight: 100,
           elevation: 0.0,
           title: Image.asset('images/LogoMeetMeThere.PNG',
-              width: 200,
-              height: 100 ),
+              width: 200, height: 100),
           backgroundColor: Color(0xFF00C2CB),
         ),
-        body:
-        ChangableWidget(),
-        bottomNavigationBar:
-        BottomNavBar(),
+        body: ChangableWidget(),
+        bottomNavigationBar: BottomNavBar(),
       ),
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/eventPage': (context) => EventPage(),
+      },
     );
   }
 }
-
