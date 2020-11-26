@@ -1,131 +1,172 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
+import '../entries.dart';
 
 class EventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Column(
+      backgroundColor: Color(0xFF293133),
+      appBar: AppBar(
+        centerTitle: true,
+        toolbarHeight: 90,
+        elevation: 0.0,
+        title: Text('${entries[number].toUpperCase()}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 28,
+              fontFamily: "raleway",
+              fontWeight: FontWeight.bold,
+            )),
+        backgroundColor: Color(0xFF00C2CB),
+      ),
+      body: ListView(
         children: <Widget>[
-          Container(
-            height: 600,
-            margin: EdgeInsets.only(bottom: 10, left: 15, right: 15),
-            padding: EdgeInsets.fromLTRB(20, 5, 15, 5),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment(
-                    0.8, 0.0), // 10% of the width, so there are ten blinds.
-                colors: [
-                  const Color.fromRGBO(41, 49, 51, 0.39),
-                  const Color.fromRGBO(112, 117, 118, 0.1)
-                ], // red to yellow
-                // repeats the gradient over the canvas
+          Column(
+            children: <Widget>[
+              Container(
+                height: 300,
+                margin: EdgeInsets.only(left: 23, right: 23),
+                padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset('images/StandortRot.png'),
+                        SizedBox(width: 30),
+                        Text('${locations[number]}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: "raleway",
+                                fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset('images/calendar.png'),
+                        SizedBox(width: 30),
+                        Text('${dateTime[number]}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: "raleway",
+                                fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          margin: EdgeInsets.only(right: 15),
+                          child: OutlineButton(
+                            borderSide: BorderSide(color: Colors.white),
+                            onPressed: () {
+                              print('Received message');
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '+',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontFamily: "raleway",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 13),
+                                Text('Follow',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontFamily: "raleway",
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          margin: EdgeInsets.only(left: 15),
+                          child: OutlineButton(
+                            borderSide: BorderSide(color: Colors.white),
+                            onPressed: () {
+                              print(MediaQuery.of(context).size);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset('images/Message.png', scale: 26),
+                                SizedBox(width: 9),
+                                Text(
+                                  'Message',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily: "raleway",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Tennis Match',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontFamily: "raleway",
-                            fontWeight: FontWeight.bold)),
-                    Image.asset('images/student.png'),
-                  ],
-                ),
-                Row(
+              Container(
+                margin:
+                    EdgeInsets.only(top: 5, bottom: 10, left: 23, right: 30),
+                padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 20),
-                    Image.asset('images/Location.png'),
-                    SizedBox(width: 20),
-                    Text('Hamburg-Altona',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: "raleway",
-                            fontWeight: FontWeight.bold))
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('About me',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 33,
+                                fontFamily: "raleway",
+                                fontWeight: FontWeight.bold)),
+                        Image.asset(
+                          'images/${photo[number]}',
+                          scale: 1.4,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                          width: 299,
+                          child: Text('${description[number]}',
+                              softWrap: true,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: "raleway",
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.7)),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 20),
-                    Image.asset('images/calendar.png'),
-                    SizedBox(width: 20),
-                    Text('08.10.2020 15:30',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: "raleway",
-                            fontWeight: FontWeight.bold))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(Icons.chat, color: Colors.red, size: 35),
-                    SizedBox(width: 20),
-                  ],
-                ),
-              ],
-            ),
-          )
+              ),
+            ],
+          ),
         ],
       ),
     );
-  }
-}
-
-class BottomNavBar extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return BottomNavigationBarLayout();
-  }
-}
-
-class EventRow extends StatelessWidget {
-  final card = new Container(
-    height: 124.0,
-    margin: new EdgeInsets.all(10.0),
-    decoration: new BoxDecoration(
-      color: Color.fromRGBO(41, 49, 51, 0.39),
-      shape: BoxShape.rectangle,
-      borderRadius: new BorderRadius.circular(8.0),
-      boxShadow: <BoxShadow>[
-        new BoxShadow(
-          color: Colors.black12,
-          blurRadius: 10.0,
-          offset: new Offset(0.0, 10.0),
-        ),
-      ],
-    ),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: 16.0,
-          horizontal: 24.0,
-        ),
-        child: new Stack(
-          children: <Widget>[
-            card,
-          ],
-        ));
-  }
-}
-
-class HomePageBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new EventRow();
   }
 }
