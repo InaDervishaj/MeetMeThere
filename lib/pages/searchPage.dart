@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../entries.dart';
 
 
 class Search extends StatefulWidget {
